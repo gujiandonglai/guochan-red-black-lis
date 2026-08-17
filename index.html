@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>国产游戏红黑榜 - 消费者评价与开发商责任风险档案平台</title>
+  <meta name="description" content="记录国产游戏开发商行为、产品生命周期、玩家公平性、商业策略及争议事件的客观消费者档案库。">
+  
+  <!-- Google Fonts & System Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  
+  <!-- Supabase JS Client (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <!-- 顶部通栏导航 -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand-area" onclick="App.navigate('home')">
+        <div class="brand-seal">黑/红</div>
+        <div class="brand-text">
+          <span class="site-title">国产游戏红黑榜</span>
+          <span class="site-tagline">购买之前，先看它过去做过什么</span>
+        </div>
+      </div>
+
+      <nav class="main-nav">
+        <button class="nav-link active" data-view="home">首页推荐</button>
+        <button class="nav-link" data-view="games">游戏档案库</button>
+        <button class="nav-link red-link" data-view="red-list">🟢 责任红榜</button>
+        <button class="nav-link black-link" data-view="black-list">🔴 避坑黑榜</button>
+        <button class="nav-link" data-view="incidents">事件数据库</button>
+        <button class="nav-link" data-view="developers">开发商信誉</button>
+        <button class="nav-link" data-view="ranking">全维度榜单</button>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn btn-outline btn-sm" onclick="App.openSubmitModal()">+ 提交事件/评价</button>
+        <div id="userAuthSection" class="user-auth-pill">
+          <!-- 由 auth.js 动态渲染登录状态或等级 -->
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 免责与核心原则声明栏 -->
+  <div class="disclaimer-bar">
+    <div class="container disclaimer-content">
+      <span class="disclaimer-badge">核心准则</span>
+      <span>本站严格区分【玩家观点】【已确认事实】【官方回应】与【证据级别】。反对人身攻击与恶意造谣，所有评分独立计算，为玩家提供可查证的消费决策参考。</span>
+      <a href="javascript:void(0)" onclick="App.openDisclaimerModal()" class="disclaimer-link">查阅完整档案准则 →</a>
+    </div>
+  </div>
+
+  <!-- 动态主视图容器 -->
+  <main id="appRoot" class="container main-content-wrapper">
+    <!-- 内容将由 JavaScript 动态路由渲染 -->
+  </main>
+
+  <!-- 全局通用提交模态窗 (Modal) -->
+  <div id="submitModal" class="modal-backdrop hidden">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3 class="modal-title">提交消费者档案与事件记录</h3>
+          <p class="modal-subtitle">严禁人身攻击。请提供可信证据链接与客观事实陈述。</p>
+        </div>
+        <button class="modal-close" onclick="App.closeSubmitModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="submitModalBody">
+        <!-- 由 submit.js 渲染动态表单 -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 查阅免责与证据等级说明模态窗 -->
+  <div id="disclaimerModal" class="modal-backdrop hidden">
+    <div class="modal-dialog modal-dialog-lg">
+      <div class="modal-header">
+        <h3 class="modal-title">《国产游戏红黑榜》档案证据与中立准则</h3>
+        <button class="modal-close" onclick="App.closeDisclaimerModal()">&times;</button>
+      </div>
+      <div class="modal-body doc-content">
+        <h4>1. 三层信息结构</h4>
+        <p>每一条事件记录必须包含：<strong>玩家观点</strong>（主观感受）、<strong>事实陈述</strong>（何时发生了何事）、<strong>确凿证据</strong>（链接与归档截图）。</p>
+        
+        <h4>2. 证据分级体系 (Evidence Tier)</h4>
+        <ul class="evidence-guide-list">
+          <li><span class="badge badge-s">S 级</span> 官方公开公告、Steam 官方更新日志、官方客服确认函。</li>
+          <li><span class="badge badge-a">A 级</span> 官方认证社交媒体（微博/B站等）、游戏内全服公告。</li>
+          <li><span class="badge badge-b">B 级</span> 具有行业公信力之媒体调查报道、两个以上独立公开事实来源。</li>
+          <li><span class="badge badge-c">C 级</span> 玩家录屏、游戏截图、版本比对解包证据。</li>
+          <li><span class="badge badge-d">D 级</span> 单一玩家口述（本站标记为未证实，不直接采信为客观事实）。</li>
+        </ul>
+
+        <h4>3. 玩家群体公平性与营销记录准则</h4>
+        <p>本站严格禁止将任何商业纠纷上升为针对整个性别或特定群体的人身攻击。记录重点为开发商是否存在<strong>针对特定群体的差异待遇、虚假营销或运营双重标准</strong>，且必须附带具体行为事实。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 全局页脚 -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand-text">
+          <span class="site-title">国产游戏红黑榜</span>
+        </div>
+        <p class="footer-desc">由玩家共同维护的国产游戏消费者风险与责任追踪数据库。倡导契约精神与负责任的开发态度。</p>
+      </div>
+      <div class="footer-col">
+        <h4>档案库分类</h4>
+        <a href="javascript:void(0)" onclick="App.navigate('red-list')">🟢 负责任开发商红榜</a>
+        <a href="javascript:void(0)" onclick="App.navigate('black-list')">🔴 消费者风险黑榜</a>
+        <a href="javascript:void(0)" onclick="App.navigate('incidents')">📋 历史争议与事件库</a>
+      </div>
+      <div class="footer-col">
+        <h4>算法与规则</h4>
+        <a href="javascript:void(0)" onclick="App.openDisclaimerModal()">证据分级标准</a>
+        <a href="javascript:void(0)" onclick="App.openDisclaimerModal()">弃坑风险指数算法</a>
+        <a href="javascript:void(0)" onclick="App.navigate('admin')">审校后台</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 国产游戏红黑榜 (Guochan Game Red-Black List). 本站评分与风险等级供消费者参考，不构成对任何企业的法律定性。</p>
+    </div>
+  </footer>
+
+  <!-- 核心脚本加载 -->
+  <script src="js/config.js"></script>
+  <script src="js/mockData.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/incidents.js"></script>
+  <script src="js/games.js"></script>
+  <script src="js/developers.js"></script>
+  <script src="js/submit.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+/* ==========================================================================
+   《国产游戏红黑榜》 设计系统：档案档案馆/新闻调查风格
+   基底：米白/纸质暖色 (#F6F5F0)  文字：深冷灰 (#1F2421)
+   红榜：翡翠绿 (#047857)        黑榜：深殷红 (#B91C1C)
+   争议：琥珀金 (#B45309)        回应：严谨蓝 (#1D4ED8)
+   ========================================================================== */
+
+:root {
+  --bg-main: #F7F6F2;
+  --bg-card: #FFFFFF;
+  --bg-alt: #EFECE4;
+  --border-color: #E2DDD3;
+  --border-dark: #C8C2B4;
+  
+  --text-primary: #1C1E21;
+  --text-secondary: #575D65;
+  --text-muted: #878E99;
+  
+  --green-main: #065F46;
+  --green-light: #ECFDF5;
+  --green-border: #A7F3D0;
+  
+  --red-main: #991B1B;
+  --red-light: #FEF2F2;
+  --red-border: #FECACA;
+  
+  --amber-main: #92400E;
+  --amber-light: #FFFBEB;
+  --amber-border: #FDE68A;
+  
+  --blue-main: #1E40AF;
+  --blue-light: #EFF6FF;
+  --blue-border: #BFDBFE;
+  
+  --font-serif: 'Noto Serif SC', "Songti SC", SimSun, Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 顶部导航 */
+.site-header {
+  background: #FFFFFF;
+  border-bottom: 2px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brand-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+.brand-seal {
+  background: var(--text-primary);
+  color: #FFF;
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 1px;
+}
+.site-title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  display: block;
+}
+.site-tagline {
+  font-size: 11px;
+  color: var(--text-secondary);
+  display: block;
+}
+
+.main-nav {
+  display: flex;
+  gap: 6px;
+}
+.nav-link {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.nav-link:hover { color: var(--text-primary); background: var(--bg-alt); }
+.nav-link.active { color: var(--text-primary); background: var(--bg-alt); font-weight: 700; }
+.nav-link.red-link { color: var(--green-main); }
+.nav-link.black-link { color: var(--red-main); }
+
+/* 核心声明通栏 */
+.disclaimer-bar {
+  background: #2A2E33;
+  color: #D1D5DB;
+  font-size: 12px;
+  padding: 8px 0;
+}
+.disclaimer-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.disclaimer-badge {
+  background: #374151;
+  color: #F9FAFB;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 11px;
+}
+.disclaimer-link { color: #93C5FD; text-decoration: underline; cursor: pointer; }
+
+/* 按钮通用系统 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 13px;
+  border: 1px solid transparent;
+}
+.btn-sm { padding: 5px 10px; font-size: 12px; }
+.btn-primary { background: var(--text-primary); color: #FFF; }
+.btn-primary:hover { background: #000; }
+.btn-outline { border-color: var(--border-dark); background: #FFF; color: var(--text-primary); }
+.btn-outline:hover { background: var(--bg-alt); }
+.btn-red { background: var(--red-main); color: #FFF; }
+.btn-green { background: var(--green-main); color: #FFF; }
+
+.main-content-wrapper {
+  padding-top: 28px;
+  padding-bottom: 60px;
+  min-height: calc(100vh - 280px);
+}
+
+/* 页脚 */
+.site-footer {
+  background: #FFFFFF;
+  border-top: 2px solid var(--border-color);
+  padding: 40px 0 24px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+}
+.footer-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 10px;
+  max-width: 420px;
+}
+.footer-col h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.footer-col a {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+.footer-col a:hover { color: var(--text-primary); text-decoration: underline; }
+.footer-bottom {
+  border-top: 1px solid var(--border-color);
+  margin-top: 32px;
+  padding-top: 16px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* 模态窗 */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.modal-backdrop.hidden { display: none; }
+.modal-dialog {
+  background: #FFF;
+  border-radius: var(--radius-md);
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+.modal-dialog-lg { max-width: 860px; }
+.modal-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.modal-title { font-family: var(--font-serif); font-size: 18px; }
+.modal-subtitle { font-size: 12px; color: var(--text-secondary); }
+.modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-muted); }
+.modal-body { padding: 20px; }
+
+/* 响应式 */
+@media (max-width: 900px) {
+  .header-container { flex-direction: column; align-items: flex-start; }
+  .main-nav { overflow-x: auto; width: 100%; padding-bottom: 4px; }
+  .footer-grid { grid-template-columns: 1fr; }
+}

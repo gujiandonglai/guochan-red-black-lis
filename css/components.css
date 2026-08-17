@@ -1,0 +1,237 @@
+/* ==========================================================================
+   组件样式：双轨评分盘、三层信息卡片、弃坑风险温度计、维护时间线
+   ========================================================================== */
+
+/* 1. 证据等级徽章 */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 3px;
+  letter-spacing: 0.3px;
+}
+.badge-s { background: #1E3A8A; color: #FFF; }
+.badge-a { background: #2563EB; color: #FFF; }
+.badge-b { background: #475569; color: #FFF; }
+.badge-c { background: #64748B; color: #FFF; }
+.badge-d { background: #94A3B8; color: #FFF; }
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.status-active { background: var(--green-light); color: var(--green-main); border: 1px solid var(--green-border); }
+.status-dormant { background: var(--amber-light); color: var(--amber-main); border: 1px solid var(--amber-border); }
+.status-abandoned { background: var(--red-light); color: var(--red-main); border: 1px solid var(--red-border); }
+
+/* 2. 双轨评分展示区 */
+.dual-score-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border-color);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  margin: 16px 0;
+}
+.score-box {
+  background: #FFF;
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  border: 1px solid var(--border-color);
+}
+.score-num {
+  font-family: var(--font-serif);
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 1;
+  margin: 6px 0;
+}
+.score-box.quality .score-num { color: #2563EB; }
+.score-box.recommend .score-num { color: var(--green-main); }
+.score-box.risk .score-num { color: var(--red-main); }
+.score-title { font-size: 13px; font-weight: 700; color: var(--text-secondary); }
+.score-desc { font-size: 11px; color: var(--text-muted); }
+
+/* 3. 弃坑与长期维护风险温度计 (Risk Meter) */
+.risk-meter {
+  background: #FFF;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 20px;
+}
+.risk-meter-bar-wrap {
+  height: 10px;
+  background: #E5E7EB;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 8px 0;
+  position: relative;
+}
+.risk-meter-bar {
+  height: 100%;
+  transition: width 0.4s ease;
+}
+.risk-low { background: #10B981; }
+.risk-mid { background: #F59E0B; }
+.risk-high { background: #EF4444; }
+.risk-extreme { background: #7F1D1D; }
+
+/* 4. 三层信息结构事件卡片 (Three-Layer Incident Card) */
+.incident-card {
+  background: #FFF;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s ease;
+}
+.incident-card:hover { box-shadow: var(--shadow-md); }
+.incident-card.red-incident { border-left: 5px solid var(--green-main); }
+.incident-card.black-incident { border-left: 5px solid var(--red-main); }
+.incident-card.dispute-incident { border-left: 5px solid var(--amber-main); }
+
+.incident-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.incident-title {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 700;
+}
+.incident-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.layer-box {
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+}
+.layer-fact { background: #F8FAFC; border-left: 3px solid #64748B; color: #1E293B; }
+.layer-opinion { background: #FFFBEB; border-left: 3px solid #D97706; color: #78350F; }
+.layer-response { background: #EFF6FF; border-left: 3px solid #2563EB; color: #1E40AF; }
+.layer-label { font-weight: 700; font-size: 11px; margin-bottom: 3px; text-transform: uppercase; }
+
+.evidence-links-wrap {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-color);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.evidence-link-item {
+  font-size: 11px;
+  color: #2563EB;
+  text-decoration: none;
+  background: var(--blue-light);
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1px solid var(--blue-border);
+}
+.evidence-link-item:hover { text-decoration: underline; }
+
+/* 5. 游戏网格卡片 (Games Grid) */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.game-card {
+  background: #FFF;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.game-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.game-card-cover {
+  height: 160px;
+  background: #2A2E33;
+  position: relative;
+  overflow: hidden;
+}
+.game-card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.game-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.game-card-title {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 700;
+}
+.game-card-dev {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.game-scores-inline {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+}
+.mini-score-label { font-size: 11px; color: var(--text-muted); }
+.mini-score-val { font-weight: 700; font-size: 14px; }
+
+/* 6. 更新时间线 */
+.timeline-item {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 16px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-primary);
+}
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: 16px;
+  bottom: -12px;
+  width: 2px;
+  background: var(--border-color);
+}
+.timeline-item:last-child::after { display: none; }
+.timeline-date { font-size: 12px; font-weight: 700; color: var(--text-secondary); }
+.timeline-content { font-size: 13px; }

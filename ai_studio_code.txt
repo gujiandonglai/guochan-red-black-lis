@@ -1,0 +1,19 @@
+guochan-red-black-list/
+├── index.html              # 核心应用入口（多模块单页+视图路由）
+├── css/
+│   ├── style.css           # 基础设计系统、排版、米白/红黑主题
+│   └── components.css      # 证据分级卡片、三层信息结构、评分雷达与维护度量尺
+├── js/
+│   ├── config.js           # 环境变量与系统配置（Supabase Anon配置）
+│   ├── supabase.js         # Supabase API 数据层与 RLS 安全封装
+│   ├── mockData.js         # 离线演示数据（开箱即用，覆盖真实案例）
+│   ├── utils.js            # 算法计算（弃坑风险度、维护间隔、双轨分值）
+│   ├── auth.js             # 用户等级与权限管理（游客/贡献者/管理员）
+│   ├── incidents.js        # 三层信息架构与证据系统渲染
+│   ├── games.js            # 游戏库检索与游戏详情（双轨指标+维护时间线）
+│   ├── developers.js       # 开发商信誉指数与历史项目追踪
+│   ├── submit.js           # 投稿系统与证据分级提交校验
+│   ├── admin.js            # 审核后台与日志审计系统
+│   └── app.js              # 全局路由、事件委托与初始化
+└── database/
+    └── schema.sql          # 生产级 Supabase PostgreSQL 建表与 RLS 策略脚本
